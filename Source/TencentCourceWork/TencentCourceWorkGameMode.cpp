@@ -5,6 +5,8 @@
 #include "UObject/ConstructorHelpers.h"
 #include "Kismet/GameplayStatics.h"
 #include "Math/UnrealMathUtility.h"
+#include "TencentCourceWorkPlayerController.h"
+#include "TencentCourceWorkPlayerState.h"
 
 ATencentCourceWorkGameMode::ATencentCourceWorkGameMode()
 	: Super()
@@ -27,11 +29,25 @@ void ATencentCourceWorkGameMode::StartPlay()
 	int i = 0;
 	while (i < ImportantNum && i < ActorsWithTag.Num() ) 
 	{
-		int ImportantIndex = FMath::RandRange(1, ActorsWithTag.Num());
+		int ImportantIndex = FMath::RandRange(1, ActorsWithTag.Num() - 1);
 		if (!ActorsWithTag[ImportantIndex]->Tags.Contains("Important"))
 		{
 			ActorsWithTag[ImportantIndex]->Tags.Add("Important");
 			i++;
 		}
 	}
+
+	//Set Game Timer.
+	FTimerHandle handle;
+	GetWorld()->GetTimerManager().SetTimer(handle, [this]()
+		{
+			int i = 0;
+			for (FConstPlayerControllerIterator Iterator = GetWorld()->GetPlayerControllerIterator(); Iterator; ++Iterator)
+			{
+				ATencentCourceWorkPlayerController* PlayerActor = Cast<ATencentCourceWorkPlayerController>(Iterator->Get());
+				ATencentCourceWorkPlayerState* playerState = PlayerActor->GetPlayerState<ATencentCourceWorkPlayerState>();
+				UE_LOG(LogTemp, Log, TEXT("Player%d Score: %f"), i++, playerState->GetScore());
+				SetPause(PlayerActor);
+			}
+		}, GameTimeLimit, false);
 }
