@@ -13,6 +13,10 @@ class ATencentCourceWorkGameMode : public AGameModeBase
 
 public:
 	ATencentCourceWorkGameMode();
+	virtual void StartPlay() override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = GameSetting)
+	int ImportantNum = 3;
 };
 
 

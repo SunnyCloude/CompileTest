@@ -27,7 +27,7 @@ public:
 	ATencentCourceWorkProjectile();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = GameSetting)
-	float HitScale;
+	float HitScale = 2.0;
 
 	/** called when projectile hits something */
 	UFUNCTION()

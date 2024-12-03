@@ -45,6 +45,12 @@ void ATencentCourceWorkProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* O
 		ATencentCourceWorkPlayerState* playerState = Cast<ATencentCourceWorkPlayerState>(character->GetPlayerState());
 		playerState->IncreaseScore();
 
+		if (OtherActor->Tags.Contains("Important"))
+		{
+			playerState->IncreaseScore();
+			UE_LOG(LogTemp, Log, TEXT("Hit Important Box!"));
+		}
+
 		//ÃüÖÐÎïÌå
 		if (!OtherActor->Tags.Contains("Scale"))
 		{

@@ -16,8 +16,7 @@ class TENCENTCOURCEWORK_API ATencentCourceWorkPlayerState : public APlayerState
 	
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=GameSetting)
-	float hitScore;
+	float hitScore = 1.0;
 	
-	ATencentCourceWorkPlayerState();
 	void IncreaseScore();
 };

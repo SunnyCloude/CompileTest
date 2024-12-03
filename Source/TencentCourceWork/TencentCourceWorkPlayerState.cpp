@@ -3,11 +3,6 @@
 
 #include "TencentCourceWorkPlayerState.h"
 
-ATencentCourceWorkPlayerState::ATencentCourceWorkPlayerState()
-{
-	SetScore(0);
-}
-
 void ATencentCourceWorkPlayerState::IncreaseScore()
 {
 	float newScore = hitScore + GetScore();
