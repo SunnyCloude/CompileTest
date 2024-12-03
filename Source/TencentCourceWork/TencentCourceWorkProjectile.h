@@ -22,8 +22,12 @@ class ATencentCourceWorkProjectile : public AActor
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	UProjectileMovementComponent* ProjectileMovement;
 
+
 public:
 	ATencentCourceWorkProjectile();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = GameSetting)
+	float HitScale;
 
 	/** called when projectile hits something */
 	UFUNCTION()

@@ -3,6 +3,8 @@
 #include "TencentCourceWorkProjectile.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
+#include "TencentCourceWorkPlayerState.h"
+#include "TencentCourceWorkCharacter.h"
 
 ATencentCourceWorkProjectile::ATencentCourceWorkProjectile() 
 {
@@ -37,6 +39,22 @@ void ATencentCourceWorkProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* O
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherComp->IsSimulatingPhysics())
 	{
 		OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
+
+		//给玩家加分
+		ATencentCourceWorkCharacter* character = Cast<ATencentCourceWorkCharacter>(GetOwner());
+		ATencentCourceWorkPlayerState* playerState = Cast<ATencentCourceWorkPlayerState>(character->GetPlayerState());
+		playerState->IncreaseScore();
+
+		//命中物体
+		if (!OtherActor->Tags.Contains("Scale"))
+		{
+			OtherActor->SetActorScale3D(FVector(HitScale));
+			OtherActor->Tags.Add("Scale");
+		}
+		else
+		{
+			OtherActor->Destroy();
+		}
 
 		Destroy();
 	}
