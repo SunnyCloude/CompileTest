@@ -17,9 +17,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = GameSetting)
 	int ImportantNum = 3;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = GameSetting)
 	float GameTimeLimit = 20.0;
 };
-
-
-

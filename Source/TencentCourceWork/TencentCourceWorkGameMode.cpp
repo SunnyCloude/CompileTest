@@ -25,6 +25,12 @@ void ATencentCourceWorkGameMode::StartPlay()
 	TArray<AActor*> ActorsWithTag;
 	UGameplayStatics::GetAllActorsWithTag(GetWorld(), "Box", ActorsWithTag);
 
+	//for (AActor* actor : ActorsWithTag)
+	//{
+	//	actor->SetReplicates(true);
+	//	actor->SetReplicateMovement(true);
+	//}
+
 	//Set [ImportantNum] Important Box. 
 	int i = 0;
 	while (i < ImportantNum && i < ActorsWithTag.Num() ) 
@@ -47,7 +53,8 @@ void ATencentCourceWorkGameMode::StartPlay()
 				ATencentCourceWorkPlayerController* PlayerActor = Cast<ATencentCourceWorkPlayerController>(Iterator->Get());
 				ATencentCourceWorkPlayerState* playerState = PlayerActor->GetPlayerState<ATencentCourceWorkPlayerState>();
 				UE_LOG(LogTemp, Log, TEXT("Player%d Score: %f"), i++, playerState->GetScore());
-				SetPause(PlayerActor);
+				PlayerActor->SetPause(true);
+				PlayerActor->DisplayGameOverUI();
 			}
 		}, GameTimeLimit, false);
 }

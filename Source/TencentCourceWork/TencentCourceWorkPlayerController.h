@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "TencentCourceWorkUserWidget.h"
 #include "GameFramework/PlayerController.h"
 #include "TencentCourceWorkPlayerController.generated.h"
 
@@ -28,4 +29,13 @@ protected:
 	virtual void BeginPlay() override;
 
 	// End Actor interface
+public:
+	UPROPERTY(EditAnywhere, Category = "UI")
+	TSubclassOf<UUserWidget> GameOverUIClass;
+
+	UPROPERTY()
+	UTencentCourceWorkUserWidget* GameOverUI;
+	
+	UFUNCTION()
+	void DisplayGameOverUI();
 };

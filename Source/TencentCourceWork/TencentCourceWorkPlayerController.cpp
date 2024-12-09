@@ -16,3 +16,15 @@ void ATencentCourceWorkPlayerController::BeginPlay()
 		Subsystem->AddMappingContext(InputMappingContext, 0);
 	}
 }
+
+void ATencentCourceWorkPlayerController::DisplayGameOverUI()
+{
+	if (GameOverUIClass)
+	{
+		GameOverUI = Cast<UTencentCourceWorkUserWidget>(CreateWidget<UUserWidget>(this, GameOverUIClass, FName("GameOverUI")));
+		if (GameOverUI)
+		{
+			GameOverUI->AddToViewport();
+		}
+	}
+}
