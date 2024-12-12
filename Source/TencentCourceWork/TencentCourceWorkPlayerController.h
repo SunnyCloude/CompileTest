@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "TencentCourceWorkUserWidget.h"
+#include "TencentCourceWorkLoginUserWidget.h"
 #include "GameFramework/PlayerController.h"
 #include "TencentCourceWorkPlayerController.generated.h"
 
@@ -38,4 +39,10 @@ public:
 	
 	UFUNCTION()
 	void DisplayGameOverUI();
+
+	UPROPERTY(EditAnywhere, Category = "UI")
+	TSubclassOf<UUserWidget> LoginUIClass;
+
+	UPROPERTY()
+	UTencentCourceWorkLoginUserWidget* LoginUI;
 };
